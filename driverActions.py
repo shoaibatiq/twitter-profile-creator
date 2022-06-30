@@ -12,20 +12,20 @@ class DriverActions():
     def random_wait(low, high):
         time_wait = random.uniform(low, high)
         sleep(time_wait)
-    def click(self, xpath):
-        element = WebDriverWait(self.driver, 30).until(
+    def click(self, xpath, wait=30):
+        element = WebDriverWait(self.driver, wait).until(
         EC.presence_of_element_located((By.XPATH, xpath)))
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
         self.random_wait(0.4, 0.7)
         element.click()
-    def human_typer(self, xpath, text: str):
-        element = WebDriverWait(self.driver, 30).until(
+    def human_typer(self, xpath, text: str, wait=30):
+        element = WebDriverWait(self.driver, wait).until(
             EC.element_to_be_clickable((By.XPATH, xpath)))
         # element.clear()
         for s in text:
             element.send_keys(s)
             sleep(random.uniform(0.07, 0.5))
-    def js_click(self, xpath):
-        element = WebDriverWait(self.driver, 30).until(
+    def js_click(self, xpath, wait=30):
+        element = WebDriverWait(self.driver, wait).until(
             EC.presence_of_element_located((By.XPATH, xpath)))
         self.driver.execute_script("arguments[0].click();", element)
